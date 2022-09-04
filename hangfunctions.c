@@ -61,9 +61,10 @@ This function
 */
 char get_guess() {
     char guess;
-    char readtillend[60];
+    char readtillend[60]; // TODO: INT_MAX?
     int count;
     while (fgets(&guess, 2, stdin)!= NULL){
+        // TODO: NT_MAX?
         fgets(readtillend, 60, stdin);
         if ( (!isalpha(guess)) || (readtillend[0] != '\n') ){
             
