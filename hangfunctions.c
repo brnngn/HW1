@@ -62,7 +62,6 @@ This function
 char get_guess() {
     char guess;
     char readtillend[60]; // TODO: INT_MAX?
-    int count;
     while (fgets(&guess, 2, stdin)!= NULL){
         // TODO: NT_MAX?
         fgets(readtillend, 60, stdin);
@@ -133,7 +132,7 @@ void print_game_state(const char word[], char game_state[], bool already_guessed
         printf("Bad guess!\n");
         *missed = *missed +1;
     }
-    printf("Missed: %d", *missed);
+    printf("Missed: %d\n", *missed);
     if ( *missed >= 7){
         printf("%s",options[7]);
         printf("You lost and made stick-person sad...\nThe word was ");
@@ -152,13 +151,14 @@ Missed: 0
 */
 }
 
-
+  /*
 int main() {
     // char guess;
     // printf("User input: ");
     // guess = get_guess();
     // printf("User input is %c", guess);
     
+  
     const int full_length = 100;
     char word[full_length];
     char game_state[full_length];
@@ -172,6 +172,7 @@ int main() {
     if (won(word, game_state)){
         printf("You WON and made the stick person happy!:)");
     }
+
 
     //printf("User input: ");
     //char guess = get_guess();
@@ -194,3 +195,4 @@ int main() {
     // printf("%c", guessed);
     return 0;
 }
+    */

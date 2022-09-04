@@ -21,7 +21,6 @@ int main(int argc, char **argv) {
     char word[full_length];
     char game_state[full_length];
     bool already_guessed[26];
-    char guess;
     int missed = 0;
     initialize_game_state(word, game_state, already_guessed);
     while(!won(word, game_state) && (missed < 7)){
@@ -30,4 +29,5 @@ int main(int argc, char **argv) {
     if (won(word, game_state)){
         printf("You WON and made the stick person happy!:)");
     }
+    return 0;
 }
