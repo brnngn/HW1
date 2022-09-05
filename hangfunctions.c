@@ -20,7 +20,7 @@ This function
 void initialize_game_state(char word[], char game_state[], bool already_guessed[26]) {
     srand(time(0));
     const int length_of_list = 10;
-    const char *words_list[length_of_list] = {"SAUSAGE", "CHICKEN", "MILK", "SODA", "HAM", "BEEF", "PORK", "PANCAKE", "EGG", "SANDWICH"};
+    const char *words_list[] = {"SAUSAGE", "CHICKEN", "MILK", "SODA", "HAM", "BEEF", "PORK", "PANCAKE", "EGG", "SANDWICH"};
     const int random_index = (rand() % length_of_list);
     strcpy(word, words_list[random_index]);
     strcpy(game_state, word);
@@ -61,17 +61,25 @@ This function
 */
 char get_guess() {
     char guess;
-    char readtillend[60]; // TODO: INT_MAX?
+    char readtillend;//[60]; 
     while (fgets(&guess, 2, stdin)!= NULL){
-        // TODO: NT_MAX?
-        fgets(readtillend, 60, stdin);
-        if ( (!isalpha(guess)) || (readtillend[0] != '\n') ){
-            
-            printf("Please input a character: ");
-        }
-        else{
-            return toupper(guess);
-        }
+    	//if user hits return without any input: 
+    	if (guess == '\n')
+    	{
+    		printf("Please input a character: ");
+    	}else{
+    		fgets(&readtillend, 2, stdin);
+    		if ( (!isalpha(guess)) || (readtillend != '\n') )
+    		{
+            		while(readtillend != '\n')
+            		{
+            			fgets(&readtillend, 2, stdin);
+           		}
+            		printf("Please input a character: ");
+        	}else{
+            		return toupper(guess);
+        	}	
+    	}
     }
     return toupper(guess);  
 }

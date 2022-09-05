@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
         print_game_state(word, game_state, already_guessed, &missed);
     }
     if (won(word, game_state)){
-        printf("You WON and made the stick person happy!:)");
+        printf("You WON and made the stick person happy!:)\n");
     }
     return 0;
 }
