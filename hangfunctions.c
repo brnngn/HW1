@@ -15,7 +15,10 @@ char *options[8] = { "|||========|||\n|||     \n|||     \n|||     \n|||     \n||
 "|||========|||\n|||   | \n|||   O \n|||  /|\\\n|||  / \\\n|||     \n|||     \n==============\n"};
 
 /*
-This function 
+This function initializes the game by firstly, randomly select a word from a pre-determined list (consisting of only foods). It then initializes 
+game_state to be exactly the same length as the chosen word but all letter are replaced with '_'. Finally, it initializes the already_guessed[26] 
+array to contain all false values since this array is used to keep track of all the characters that the player guesses (the input of the user). Each 
+element in the already_guessed[26] corresponds to a character in the alphabet in the same order.
 */
 void initialize_game_state(char word[], char game_state[], bool already_guessed[26]) {
     srand(time(0));
@@ -33,12 +36,11 @@ void initialize_game_state(char word[], char game_state[], bool already_guessed[
     {
         already_guessed[i] = false;
     }
-    //printf("%s",word);
-    //printf("%s",game_state);
 }
 
 /*
-This function 
+This function checks the word for the guessed letter. if the guessed letter appears in the word, the function updates game_state with the guess at any 
+locations it appears. The function also returns whether the guessed letter appears in the word.
 */
 bool update_game_state(char guess, const char word[], char game_state[]) {
     int word_length = strlen(word);
@@ -57,36 +59,31 @@ bool update_game_state(char guess, const char word[], char game_state[]) {
 
 
 /*
-This function 
+This function simply asks for user input, i.e. which letter the user want to guess. Only letters from the English alphabet are considered to be valid input. 
+In the case that the user keeps entering invalid inputs (digits, words, sentences, special characters, etc.), the function will just keep asking for the input
+until the appropriate input is entered.
 */
 char get_guess() {
     char guess;
-    char readtillend;//[60]; 
+    char read_till_end[60]; // TODO: INT_MAX?
     while (fgets(&guess, 2, stdin)!= NULL){
-    	//if user hits return without any input: 
-    	if (guess == '\n')
-    	{
-    		printf("Please input a character: ");
-    	}else{
-    		fgets(&readtillend, 2, stdin);
-    		if ( (!isalpha(guess)) || (readtillend != '\n') )
-    		{
-            		while(readtillend != '\n')
-            		{
-            			fgets(&readtillend, 2, stdin);
-           		}
-            		printf("Please input a character: ");
-        	}else{
-            		return toupper(guess);
-        	}	
-    	}
+        // TODO: NT_MAX?
+        fgets(read_till_end, 60, stdin);
+        if ( (!isalpha(guess)) || (read_till_end[0] != '\n') ){
+            
+            printf("Please input a character: ");
+        }
+        else{
+            return toupper(guess);
+        }
     }
     return toupper(guess);  
 }
 
-// /*
-// This function 
-// */
+/*
+This function checks if all the letters in the word has been checked in the game_state. The function returns true if all the letters are guessed, meaning
+the player has won the game. The function returns false if the player has not won yet. 
+*/
 bool won(const char word[], char game_state[]) {
     int word_length = strlen(word);
     for (size_t i = 0; i < word_length; i++)
@@ -99,7 +96,7 @@ bool won(const char word[], char game_state[]) {
 }
 
 /*
-This function checks if the character was already guessed.
+This function checks if the character was already guessed. 
 */
 int previous_guess(char guess, bool already_guessed[26]) {
     int index = guess - 'A';
@@ -107,10 +104,11 @@ int previous_guess(char guess, bool already_guessed[26]) {
 }
  
 // /*
-// This function 
+// This function provided a user interface for the player. Specifically, it prints out the current game state and the letters already guessed. 
 // */
 void print_game_state(const char word[], char game_state[], bool already_guessed[26],int *missed) {
     int word_length = strlen(word);
+    int miss_limit = 7;
     printf("%s",options[*missed]);
     for (size_t i = 0; i < word_length; i++)
     {
@@ -141,8 +139,8 @@ void print_game_state(const char word[], char game_state[], bool already_guessed
         *missed = *missed +1;
     }
     printf("Missed: %d\n", *missed);
-    if ( *missed >= 7){
-        printf("%s",options[7]);
+    if ( *missed >= miss_limit){
+        printf("%s",options[miss_limit]);
         printf("You lost and made stick-person sad...\nThe word was ");
         for (size_t i = 0; i < word_length; i++)
         {

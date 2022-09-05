@@ -18,12 +18,13 @@ bool previous_guess(char guess, bool already_guessed[26]);
 
 int main(int argc, char **argv) {
     const int full_length = 100;
+    const int miss_limit = 7;
     char word[full_length];
     char game_state[full_length];
     bool already_guessed[26];
     int missed = 0;
     initialize_game_state(word, game_state, already_guessed);
-    while(!won(word, game_state) && (missed < 7)){
+    while(!won(word, game_state) && (missed < miss_limit)){
         print_game_state(word, game_state, already_guessed, &missed);
     }
     if (won(word, game_state)){
