@@ -61,21 +61,31 @@ bool update_game_state(char guess, const char word[], char game_state[]) {
 /*
 This function simply asks for user input, i.e. which letter the user want to guess. Only letters from the English alphabet are considered to be valid input. 
 In the case that the user keeps entering invalid inputs (digits, words, sentences, special characters, etc.), the function will just keep asking for the input
-until the appropriate input is entered.
+until the appropriate input is entered. In this function, we use a char variable called read_till_end to basically read all of the input from the user since 
+fgets behaves weirdly when the length of the input goes beyond n.
 */
 char get_guess() {
     char guess;
-    char read_till_end[60]; // TODO: INT_MAX?
-    while (fgets(&guess, 2, stdin)!= NULL){
-        // TODO: NT_MAX?
-        fgets(read_till_end, 60, stdin);
-        if ( (!isalpha(guess)) || (read_till_end[0] != '\n') ){
-            
-            printf("Please input a character: ");
-        }
-        else{
-            return toupper(guess);
-        }
+    char read_till_end;//[60]; 
+    fgets(&guess, 2, stdin);
+    while (guess != NULL){
+    	//if user hits return without any input: 
+    	if (guess == '\n')
+    	{
+    		printf("Please input a character: ");
+    	}else{
+    		fgets(&read_till_end, 2, stdin);
+    		if ( (!isalpha(guess)) || (read_till_end != '\n') )
+    		{
+            		while(read_till_end != '\n')
+            		{
+            			fgets(&read_till_end, 2, stdin);
+           		}
+            		printf("Please input a character: ");
+        	}else{
+            		return toupper(guess);
+        	}	
+    	}
     }
     return toupper(guess);  
 }
@@ -104,7 +114,7 @@ int previous_guess(char guess, bool already_guessed[26]) {
 }
  
 // /*
-// This function provided a user interface for the player. Specifically, it prints out the current game state and the letters already guessed. 
+// This function provides a user interface for the player. Specifically, it prints out the current game state and the letters already guessed. 
 // */
 void print_game_state(const char word[], char game_state[], bool already_guessed[26],int *missed) {
     int word_length = strlen(word);
