@@ -65,29 +65,28 @@ until the appropriate input is entered. In this function, we use a char variable
 fgets behaves weirdly when the length of the input goes beyond n.
 */
 char get_guess() {
-    char guess;
-    char read_till_end;//[60]; 
-    fgets(&guess, 2, stdin);
-    while (guess != NULL){
+    char guess[2];
+    char read_till_end[2];
+    while (fgets(guess, 2, stdin) != NULL){
     	//if user hits return without any input: 
-    	if (guess == '\n')
+    	if (guess[0] == '\n')
     	{
     		printf("Please input a character: ");
     	}else{
-    		fgets(&read_till_end, 2, stdin);
-    		if ( (!isalpha(guess)) || (read_till_end != '\n') )
+            fgets(read_till_end, 2, stdin);
+    		if ( (!isalpha(guess[0])) || (read_till_end[0] != '\n') )
     		{
-            		while(read_till_end != '\n')
-            		{
-            			fgets(&read_till_end, 2, stdin);
+            	while(read_till_end[0] != '\n')
+            	{
+            		fgets(read_till_end, 2, stdin);
            		}
-            		printf("Please input a character: ");
+            	printf("Please input a character: ");
         	}else{
-            		return toupper(guess);
+            	return toupper(guess[0]);
         	}	
     	}
     }
-    return toupper(guess);  
+    return toupper(guess[0]);  
 }
 
 /*
