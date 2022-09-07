@@ -66,7 +66,7 @@ int main()
   assert(result == true);
   assert(!strcmp(game_state,expected_state));
   
-  //for a guess that exists in multiple places & the begining of the word 
+  //for a guess that exists in multiple places & the beginning of the word 
   strcpy(game_state, "_______");
   strcpy(expected_state, "S__S___");
   guess = 'S';
@@ -103,7 +103,7 @@ int main()
   printf("Passed all the tests for function update_game_state!\n");
 
   printf("Running tests for function get_guess.\n");
-  printf("(TIPs!!! Suggestd input for test cases:\n\tvalid cases: single letter (for both lower and upper cases)\n\tinvalid cases: digit(s), space and/or other special character(s) mixed with letter(s), empty input is also invalid)\n");
+  printf("(TIPs!!! Suggested input for test cases:\n\tvalid cases: single letter (for both lower and upper cases)\n\tinvalid cases: digit(s), space and/or other special character(s) mixed with letter(s), empty input is also invalid)\n");
   printf("Please input your guess: ");
   guess = get_guess();
   printf("guess: %c\n",guess);

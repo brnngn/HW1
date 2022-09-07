@@ -57,7 +57,7 @@ bool update_game_state(char guess, const char word[], char game_state[]) {
       
 /*
 This function asks for and reads the user input, i.e. which letter the user want to guess. 
-Only when a letter from the English alphabet inputed along with no other characters, 
+Only when a letter from the English alphabet is input along with no other characters, 
 the input is considered to be valid. In cases that the user enters invalid inputs (empty input, 
 digits, words, sentences, special characters, etc.), the function will ask the user for another 
 input till it gets a valid input.
