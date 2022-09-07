@@ -25,17 +25,13 @@ int main()
 
   printf("Running tests for function initialize_game_state.\n");
   initialize_game_state(word, game_state, already_guessed);
-  int word_length = sizeof(word)/sizeof(word[0]);
-  int game_state_length = sizeof(game_state)/sizeof(game_state[0]);
+  int word_length = strlen(word);
+  int game_state_length = strlen(game_state);
   assert(word_length == game_state_length);
-  // for (size_t i = 0; i < word_length; i++)
-  // {
-  //   printf("%c\n", word[i]);
-  // }
-  // for (size_t i = 0; i < game_state_length; i++)
-  // {
-  //   printf("%c\n", game_state[i]);
-  // }
+  for (size_t i = 0; i < game_state_length; i++)
+  {
+    assert(game_state[i] == '_');
+  }
   for (size_t i = 0; i < 26; i++)
   {
     assert(already_guessed[i] == false);
