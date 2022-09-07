@@ -21,7 +21,8 @@ array to contain all false values since this array is used to keep track of all 
 element in the already_guessed[26] corresponds to a character in the English alphabet in the same order.
 */
 void initialize_game_state(char word[], char game_state[], bool already_guessed[26]) {
-    srand(time(0));
+    time_t t;
+    srand((unsigned) time(&t));
     const int length_of_list = 10;
     const char *words_list[] = {"SAUSAGE", "CHICKEN", "MILK", "SODA", "HAM", "BEEF", "PORK", "PANCAKE", "EGG", "SANDWICH"};
     const int random_index = (rand() % length_of_list);
