@@ -15,11 +15,11 @@ bool previous_guess(char guess, bool already_guessed[26]);
 int main() 
 {
   const int full_length = 100;
-  const int miss_limit = 7;
+  //const int miss_limit = 7;
   char word[full_length];
   char game_state[full_length];
   bool already_guessed[26];
-  int missed = 0;
+  //int missed = 0;
   char guess;
   bool result;
 
@@ -60,7 +60,8 @@ int main()
 
   printf("Running tests for function get_guess.\n");
   guess = get_guess();
-  assert(isalpha(guess) == true);
+  printf("guess: %c\n",guess);
+  assert(isalpha(guess) != 0); 
   printf("Passed all the tests for function get_guess!\n");
 
   printf("Running test for function won. \n");
@@ -79,5 +80,7 @@ int main()
   printf("Running test for function previous_guess.\n");
   
   printf("Passed all the tests for function previous_guess!\n");
+  
+  
   return(0);
 }
