@@ -66,7 +66,7 @@ int main()
   assert(result == true);
   assert(!strcmp(game_state,expected_state));
   
-  //for a guess that exists in multiple places & the begining of the word 
+  //for a guess that exists in multiple places & the beginning of the word 
   strcpy(game_state, "_______");
   strcpy(expected_state, "S__S___");
   guess = 'S';
@@ -102,9 +102,8 @@ int main()
 
   printf("Passed all the tests for function update_game_state!\n");
 
-  
   printf("Running tests for function get_guess.\n");
-  printf("(TIPs!!! Suggestd input for test cases:\n\tvalid cases: single letter (for both lower and upper cases)\n\tinvalid cases: digit(s), space and/or other special character(s) mixed with letter(s), empty input is also invalid)\n");
+  printf("(TIPs!!! Suggested input for test cases:\n\tvalid cases: single letter (for both lower and upper cases)\n\tinvalid cases: digit(s), space and/or other special character(s) mixed with letter(s), empty input is also invalid)\n");
   printf("Please input your guess: ");
   guess = get_guess();
   printf("guess: %c\n",guess);
@@ -137,7 +136,31 @@ int main()
   printf("Passed all the tests for function won!\n");
   
   printf("Running test for function previous_guess.\n");
-  
+  //case 1: letter A has not been guessed
+  guess = 'A';
+  result = previous_guess(guess, already_guessed);
+  assert(result == false);
+
+  //case 2: letter A has been guessed
+  already_guessed[0] = true; //letter A has been guessed
+  result = previous_guess(guess, already_guessed);
+  assert(result == true);
+
+  //case 3: different un-guessed letter
+  guess = 'H';
+  result = previous_guess(guess, already_guessed);
+  assert(result == false);
+
+  //case 4: different un-guessed letter
+  guess = 'Z';
+  result = previous_guess(guess, already_guessed);
+  assert(result == false);
+
+  //case 5: different guessed letter
+  int index = guess - 'A';
+  already_guessed[index] = true;
+  result = previous_guess(guess, already_guessed);
+  assert(result == true);
   printf("Passed all the tests for function previous_guess!\n");
   
   printf("Running test for function print_game_state.\n ");
@@ -171,5 +194,8 @@ int main()
         printf("Yes it's %s!\nYou WON and made the stick person happy!:)\n",word);
   }
   printf("Passed all the tests for function print_game_state!\n");
+  
+  
+  
   return(0);
 }
