@@ -188,7 +188,7 @@ int main()
         assert(n_guessed == (n_last_guessed+1));
         n_last_guessed ++;
         assert( (missed == (last_missed+1))  || (missed == last_missed) );
-        last_missed++;
+        last_missed = missed;
   }
   if (won(word, game_state)){
         printf("Yes it's %s!\nYou WON and made the stick person happy!:)\n",word);
