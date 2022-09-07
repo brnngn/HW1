@@ -123,7 +123,7 @@ int main()
   result = won(word, game_state);
   assert(result == false);
   printf("Passed all the tests for function won!\n");
-
+  */
   printf("Running test for function previous_guess.\n");
   //case 1: letter A has not been guessed
   guess = 'A';
@@ -150,7 +150,7 @@ int main()
   result = previous_guess(guess, already_guessed);
   assert(result == false);
   printf("Passed all the tests for function previous_guess!\n");
-  */
+  
   
   return(0);
 }
