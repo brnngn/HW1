@@ -52,15 +52,15 @@ bool update_game_state(char guess, const char word[], char game_state[]) {
             if_contained = true;
         }
     }
-    //printf("%s",word);
-    //printf("%s",game_state);
     return if_contained;
 }
       
 /*
-This function simply asks for user input, i.e. which letter the user want to guess. Only letters from the English alphabet are considered to be valid input. 
-In the case that the user keeps entering invalid inputs (digits, words, sentences, special characters, etc.), the function will just keep asking for the input
-until the appropriate input is entered. 
+This function asks for and reads the user input, i.e. which letter the user want to guess. 
+Only when a letter from the English alphabet inputed along with no other characters, 
+the input is considered to be valid. In cases that the user enters invalid inputs (empty input, 
+digits, words, sentences, special characters, etc.), the function will ask the user for another 
+input till it gets a valid input.
 */
 char get_guess() {
     char guess[2];
