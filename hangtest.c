@@ -147,22 +147,21 @@ int main()
   result = previous_guess(guess, already_guessed);
   assert(result == true);
 
-  //case 3: inappropriate guess input (non-alphabetical)
-  guess = '%';
+  //case 3: different un-guessed letter
+  guess = 'H';
   result = previous_guess(guess, already_guessed);
   assert(result == false);
 
-  //case 4: lower case guess (we don't work with lower case letters)
-  guess = 'a';
+  //case 4: different un-guessed letter
+  guess = 'Z';
   result = previous_guess(guess, already_guessed);
   assert(result == false);
 
-  //case 5: inappropriate input (string)
-  guess = "AB";
+  //case 5: different guessed letter
+  int index = guess - 'A';
+  already_guessed[index] = true;
   result = previous_guess(guess, already_guessed);
-  assert(result == false);
+  assert(result == true);
   printf("Passed all the tests for function previous_guess!\n");
-  
-  
   return(0);
 }
