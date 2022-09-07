@@ -125,7 +125,30 @@ int main()
   printf("Passed all the tests for function won!\n");
 
   printf("Running test for function previous_guess.\n");
-  
+  //case 1: letter A has not been guessed
+  guess = 'A';
+  result = previous_guess(guess, already_guessed);
+  assert(result == false);
+
+  //case 2: letter A has been guessed
+  already_guessed[0] = true; //letter A has been guessed
+  result = previous_guess(guess, already_guessed);
+  assert(result == true);
+
+  //case 3: inappropriate guess input (non-alphabetical)
+  guess = '%';
+  result = previous_guess(guess, already_guessed);
+  assert(result == false);
+
+  //case 4: lower case guess (we don't work with lower case letters)
+  guess = 'a';
+  result = previous_guess(guess, already_guessed);
+  assert(result == false);
+
+  //case 5: inappropriate input (string)
+  guess = "AB";
+  result = previous_guess(guess, already_guessed);
+  assert(result == false);
   printf("Passed all the tests for function previous_guess!\n");
   */
   
