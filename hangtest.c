@@ -102,28 +102,40 @@ int main()
 
   printf("Passed all the tests for function update_game_state!\n");
 
-  /*
   printf("Running tests for function get_guess.\n");
+  printf("(TIPs!!! Suggestd input for test cases:\n\tvalid cases: single letter (for both lower and upper cases)\n\tinvalid cases: digit(s), space and/or other special character(s) mixed with letter(s), empty input is also invalid)\n");
+  printf("Please input your guess: ");
   guess = get_guess();
   printf("guess: %c\n",guess);
   assert(isalpha(guess) != 0); 
   printf("Passed all the tests for function get_guess!\n");
 
 
-  
   printf("Running test for function won. \n");
+  //when won
   strcpy(word, "SAUSAGE");
   strcpy(game_state, "SAUSAGE");
   result = won(word, game_state);
   assert(result == true);
-  strcpy(game_state, "CHICKEN");
+  //when not winning with no letter guessed right
+  strcpy(game_state, "_______");
   result = won(word, game_state);
   assert(result == false);
-  strcpy(game_state, "SAUSAG");
+  //when not winning with only last letter missed
+  strcpy(game_state, "SAUSAG_");
+  result = won(word, game_state);
+  assert(result == false);
+  //when not winning with only first letter missed
+  strcpy(game_state, "_AUSAGE");
+  result = won(word, game_state);
+  assert(result == false);
+  //when not winning with only one letter in the middle missed
+  strcpy(game_state, "SA_SAGE");
   result = won(word, game_state);
   assert(result == false);
   printf("Passed all the tests for function won!\n");
-  */
+  
+  
   printf("Running test for function previous_guess.\n");
   //case 1: letter A has not been guessed
   guess = 'A';
