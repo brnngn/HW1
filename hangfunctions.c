@@ -18,7 +18,7 @@ char *options[8] = { "|||========|||\n|||     \n|||     \n|||     \n|||     \n||
 This function initializes the game by firstly, randomly select a word from a pre-determined list (consisting of only foods). It then initializes 
 game_state to be exactly the same length as the chosen word but all letter are replaced with '_'. Finally, it initializes the already_guessed[26] 
 array to contain all false values since this array is used to keep track of all the characters that the player guesses (the input of the user). Each 
-element in the already_guessed[26] corresponds to a character in the alphabet in the same order.
+element in the already_guessed[26] corresponds to a character in the English alphabet in the same order.
 */
 void initialize_game_state(char word[], char game_state[], bool already_guessed[26]) {
     srand(time(0));
@@ -56,13 +56,11 @@ bool update_game_state(char guess, const char word[], char game_state[]) {
     //printf("%s",game_state);
     return if_contained;
 }
-
-
+      
 /*
 This function simply asks for user input, i.e. which letter the user want to guess. Only letters from the English alphabet are considered to be valid input. 
 In the case that the user keeps entering invalid inputs (digits, words, sentences, special characters, etc.), the function will just keep asking for the input
-until the appropriate input is entered. In this function, we use a char variable called read_till_end to basically read all of the input from the user since 
-fgets behaves weirdly when the length of the input goes beyond n.
+until the appropriate input is entered. 
 */
 char get_guess() {
     char guess[2];
@@ -105,16 +103,31 @@ bool won(const char word[], char game_state[]) {
 }
 
 /*
-This function checks if the character was already guessed. 
+This function checks if the character was already guessed. The function returns true if the letter is already guessed by the player; otherwise, the function
+returns false.
 */
 int previous_guess(char guess, bool already_guessed[26]) {
     int index = guess - 'A';
     return already_guessed[index];
 }
  
-// /*
-// This function provides a user interface for the player. Specifically, it prints out the current game state and the letters already guessed. 
-// */
+/*
+This function provides a user interface for the player. Specifically, it prints out the current game state and the letters already guessed in the following
+format:
+|||========|||
+|||
+|||
+|||
+|||
+|||
+|||
+================
+___
+Already guessed: 
+What is your guess? 
+Bad/Good guess!
+Missed:  
+*/
 void print_game_state(const char word[], char game_state[], bool already_guessed[26],int *missed) {
     int word_length = strlen(word);
     int miss_limit = 7;
@@ -157,57 +170,5 @@ void print_game_state(const char word[], char game_state[], bool already_guessed
         }
         printf(".\n");
     }
-/*
-_ _ _
-Already guessed:
-What is your guess? e
-Good guess.
-Missed: 0
-*/
 }
 
-  /*
-int main() {
-    // char guess;
-    // printf("User input: ");
-    // guess = get_guess();
-    // printf("User input is %c", guess);
-    
-  
-    const int full_length = 100;
-    char word[full_length];
-    char game_state[full_length];
-    bool already_guessed[26];
-    char guess;
-    int missed = 0;
-    initialize_game_state(word, game_state, already_guessed);
-    while(!won(word, game_state) && (missed < 7)){
-        print_game_state(word, game_state, already_guessed, &missed);
-    }
-    if (won(word, game_state)){
-        printf("You WON and made the stick person happy!:)");
-    }
-
-
-    //printf("User input: ");
-    //char guess = get_guess();
-    //update_game_state(guess, word, game_state);
-    //bool sth[26];
-    //char guess;
-    //printf("%d", previous_guess(guess, sth));
-    // options[1] = "|||   | \n";
-    // options[2] = "|||   O \n";
-    // options[3] = "|||  /  \n";
-    // options[3] = "|||  /| \n";
-    // options[3] = "|||  /|\\\n";
-    // options[4] = "|||  /  \n";
-    // options[4] = "|||  / \\\n";
-    // for (size_t i = 0; i < 8; i++){
-    //     printf("%s", options[i]);
-    // }
-    // char guessed = 'A';
-    // guessed = guessed + 5;
-    // printf("%c", guessed);
-    return 0;
-}
-    */
